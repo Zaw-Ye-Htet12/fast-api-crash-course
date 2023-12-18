@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "fastapi-crash-course"
+version = "0.1.0"
+description = ""
+authors = ["Zaw Ye Htet <zawye.htet5@frontiir.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+uvicorn = "^0.24.0.post1"
+fastapi = "^0.105.0"
+pydantic = "^2.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

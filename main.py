@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Path, Query
 from typing import Optional, List
 from pydantic import BaseModel
-from api import user, course, section
+from api import courses, sections, users
 
 app = FastAPI(
     title="FastApi Crash Course",
@@ -16,6 +16,6 @@ app = FastAPI(
     },
 )
 
-app.include_router(user.router)
-app.include_router(course.router)
-app.include_router(section.router)
+app.include_router(users.router)
+app.include_router(courses.router)
+app.include_router(sections.router)

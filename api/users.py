@@ -5,10 +5,14 @@ from typing import List
 
 from api.utils.users import get_user, get_user_by_email, get_users, create_user
 from api.utils.course import get_user_courses
-from db.db_setup import get_db
+
+from db.db_setup import get_db, get_async_db
+
 from pydantic_schemas.user import User, UserCreate
 from pydantic_schemas.course import Course
+
 from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 router = fastapi.APIRouter()
 
@@ -26,8 +30,8 @@ async def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
     return create_user(db, user)
 
 @router.get('/users/{user_id}', response_model=User)
-async def read_user(user_id: int, db: Session = Depends(get_db)):
-    db_user = get_user(db=db, user_id=user_id)
+async def read_user(user_id: int, db: AsyncSession = Depends(get_async_db)):
+    db_user = await get_user(db=db, user_id=user_id)
     if not db_user:
         raise HTTPException(status_code=400, detail="User Not Found")
     return db_user
